@@ -17,6 +17,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'supersecretkey'
 db = SQLAlchemy(app)
 
+
 class Habit(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -99,10 +100,14 @@ def single_graph(habit_id):
     plt.tight_layout()
 
     plot_path = os.path.join('static', 'images', f'habit_{habit.id}_plot.png')
+    os.makedirs(os.path.dirname(plot_path), exist_ok=True)
     plt.savefig(plot_path)
     plt.close()
 
-    return render_template('plot.html', plot_url=plot_path)
+    relative_path = plot_path.split("static/")[-1]
+    return render_template('plot.html', plot_url=url_for('static', filename=relative_path))
+
+
 
 @app.route('/habit_plot')
 def habit_plot():
@@ -123,10 +128,14 @@ def habit_plot():
     plt.tight_layout()
 
     plot_path = os.path.join('static', 'images', 'all_habit_plot.png')
+    os.makedirs(os.path.dirname(plot_path), exist_ok=True)
     plt.savefig(plot_path)
     plt.close()
 
-    return render_template('plot.html', plot_url=plot_path)
+    relative_path = plot_path.split("static/")[-1]
+    return render_template('plot.html', plot_url=url_for('static', filename=relative_path))
+
+
 
 @app.route("/edit-habit/<int:habit_id>", methods=["GET", "POST"])
 def edit_habit(habit_id):
