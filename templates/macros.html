@@ -1,0 +1,11 @@
+{% macro habit_item(habit) %}
+      <form method="POST" action="{{ url_for('toggle_habit', habit_id=habit.id) }}">
+        <label class="switch">
+        <input type="checkbox" name="completed" onchange="this.form.submit()" {% if habit.completed %}checked{% endif %}>
+        <span class="slider"></span>
+        </label>
+    {{ habit.name }}
+    <p>Created on {{ habit.created_at.strftime('%b %d, %Y') }}</p>
+  </form>
+
+{% endmacro %}

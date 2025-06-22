@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>📈 Habit Tracking Chart</h2>
+
+{% if plot_url %}
+  <img src="{{ url_for('static', filename=plot_url.split('static/')[-1]) }}" alt="Habit Chart" class="img-fluid my-3">
+{% else %}
+  <p>No data available for this habit yet.</p>
+{% endif %}
+
+<!-- Navigation Buttons -->
+<div class="mt-3">
+  {% if habit_id %}
+    <a class="btn btn-outline-secondary btn-sm me-2" href="{{ url_for('single_graph', habit_id=habit_id) }}">
+      🔁 Refresh This Habit
+    </a>
+  {% endif %}
+  <a class="btn btn-outline-dark btn-sm" href="{{ url_for('habit_plot') }}">📈 All Habit Trends</a>
+  <a class="btn btn-outline-primary btn-sm" href="{{ url_for('home') }}">🏠 Back to Home</a>
+</div>
+
+{% endblock %}

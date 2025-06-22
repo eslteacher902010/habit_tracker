@@ -1,0 +1,13 @@
+# Ignore Python virtual environment
+.venv/
+__pycache__/
+*.pyc
+
+# Ignore VS Code config
+.vscode/
+
+# Ignore system files
+.DS_Store
+
+# Ignore Flask config/secrets
+.env
