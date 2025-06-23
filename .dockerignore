@@ -1,0 +1,18 @@
+# flyctl launch added from .gitignore
+# Ignore Python virtual environment
+**/.venv
+**/__pycache__
+**/*.pyc
+
+# Ignore VS Code config
+**/.vscode
+
+# Ignore system files
+**/.DS_Store
+
+# Ignore Flask config/secrets
+**/.env
+
+# flyctl launch added from .venv/.gitignore
+.venv/**/*
+fly.toml
